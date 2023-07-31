@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { } from form '@angular/forms'
+import {formsModule } from form '@angular/forms'
 
 @NgModule({
   declarations: [
