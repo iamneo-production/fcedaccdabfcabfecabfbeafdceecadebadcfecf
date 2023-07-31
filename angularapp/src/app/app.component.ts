@@ -7,8 +7,8 @@ import {FormControl,FormGroup, Validators} from '@angular/forms'
 })
 export class AppComponent {
   title = 'angularapp';
-userregistrationform: new FormGroup({
-  fname : new FormControl("",[Validators.required, Validators.maxLength(5)]),
+userregistrationform = new FormGroup({
+  fname : new FormControl("",[Validators.required, Validators.maxLength(5)])
 });
 
 }
