@@ -7,5 +7,4 @@ import {FormControl,FormGroup} from '@angular/forms'
 })
 export class AppComponent {
   title = 'angularapp';
-UserRegistration: FormGroup<any>;
 }
