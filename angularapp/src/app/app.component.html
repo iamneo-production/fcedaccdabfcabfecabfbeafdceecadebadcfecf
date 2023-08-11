@@ -1,56 +1,51 @@
-<!-- app.component.html -->
 <h1>User Registration Form</h1>
+<form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+      <div>
+        <label for="inputFirstname">First Name</label>
+        <input
+          type="text"
+          id="inputFirstname"
+          formControlName="firstName"
+          required
+          minlength="3"
+          maxlength="50"
+          pattern="^[a-zA-Z ]+$"
+        />
+        <div id="errorFirstName" *ngIf="isFieldInvalid('firstName')">errorFirstName</div>
+      </div>
 
-<form [formGroup]="form">
-  <div class="form-group">
-    <label for="inputFirstname">First Name</label>
-    <input type="text" id="inputFirstname" formControlName="firstName" minlength="3" maxlength="50" pattern="^[a-zA-Z]+$" />
-    <div *ngIf="form.get('firstName').errors">
-      <span class="error" id="errorFirstName" *ngFor="let error of form.get('firstName').errors">
-        {{ error }}
-      </span>
-    </div>
-  </div>
+      <div>
+        <label for="gender">Gender</label>
+        <label>
+          <input type="checkbox" formControlName="gender" value="Male" />
+          Male
+        </label>
+        <label>
+          <input type="checkbox" formControlName="gender" value="Female" />
+          Female
+        </label>
+        <div id="errorGender" *ngIf="isFieldInvalid('gender')">errorGender</div>
+      </div>
 
-  <div class="form-group">
-    <label for="gender">Gender</label>
-    <input type="checkbox" id="gender" formControlName="gender" />
-  </div>
+      <div>
+        <label for="country">Country of Origin</label>
+        <input type="text" id="country" formControlName="country" required />
+        <div id="errorCountry" *ngIf="isFieldInvalid('country')">errorCountry</div>
+      </div>
 
-  <div class="form-group">
-    <label for="country">Country</label>
-    <select id="country" formControlName="country">
-      <option value="">Select Country</option>
-      <option value="US">United States</option>
-      <option value="CA">Canada</option>
-      <option value="IN">India</option>
-    </select>
-    <div *ngIf="form.get('country').errors">
-      <span class="error" id="errorCountry" *ngFor="let error of form.get('country').errors">
-        {{ error }}
-      </span>
-    </div>
-  </div>
+      <div>
+        <label for="city">City of Origin</label>
+        <input type="text" id="city" formControlName="city" required />
+        <div id="errorCity" *ngIf="isFieldInvalid('city')">errorCity</div>
+      </div>
 
-  <div class="form-group">
-    <label for="city">City</label>
-    <input type="text" id="city" formControlName="city" />
-    <div *ngIf="form.get('city').errors">
-      <span class="error" id="errorCity" *ngFor="let error of form.get('city').errors">
-        {{ error }}
-      </span>
-    </div>
-  </div>
+      <div>
+        <label for="inputAge">age</label>
+        <input type="number" id="inputAge" formControlName="age" [required]="isAgeRequired()" />
+        <div id="errorAge" *ngIf="isFieldInvalid('age')">
+          errorAge
+        </div>
+      </div>
 
-  <div class="form-group">
-    <label for="inputAge">Age</label>
-    <input type="number" id="inputAge" formControlName="age" min="18" max="100" />
-    <div *ngIf="form.get('age').errors">
-      <span class="error" id="errorAge" *ngFor="let error of form.get('age').errors">
-        {{ error }}
-      </span>
-    </div>
-  </div>
-
-  <button type="submit" [disabled]="!form.valid">Submit</button>
+      <button type="submit">Submit</button>
 </form>

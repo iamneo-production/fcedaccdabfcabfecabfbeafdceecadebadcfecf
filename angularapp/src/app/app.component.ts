@@ -1,29 +1,41 @@
-// app.component.ts
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
+  registrationForm!: FormGroup;
 
-  form: FormGroup;
+  constructor(private formBuilder: FormBuilder) {}
 
-  constructor(private fb: FormBuilder) {
-    this.form = this.fb.group({
-      firstName: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50), Validators.pattern('^[a-zA-Z]+$')]]
+  ngOnInit() {
+    this.registrationForm = this.formBuilder.group({
+      firstName: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50), Validators.pattern('^[a-zA-Z ]+$')]],
+      gender: [''],
+      country: ['', Validators.required],
+      city: ['', Validators.required],
+      age: ['', []],
     });
   }
 
-  ngOnInit() {
+  // Helper function to check if a form field is invalid and has been touched or dirty
+  isFieldInvalid(field: string): boolean {
+    const control: AbstractControl | null = this.registrationForm.get(field);
+    return control!.invalid && (control!.dirty || control!.touched) || false;
   }
 
+  // Helper function to check if age is required based on the selected country
+  isAgeRequired(): boolean {
+    const countryControl: AbstractControl | null = this.registrationForm.get('country');
+    return ['US', 'Canada', 'India'].includes(countryControl!.value);
+  }
+
+  // Function to handle form submission
   onSubmit() {
-    if (this.form.valid) {
-      console.log(this.form.value);
+    if (this.registrationForm.valid) {
+      console.log('Form submitted:', this.registrationForm.value);
     }
   }
-
 }
