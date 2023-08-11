@@ -1,51 +1,49 @@
 <h1>User Registration Form</h1>
+
 <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
-      <div>
-        <label for="inputFirstname">First Name</label>
-        <input
-          type="text"
-          id="inputFirstname"
-          formControlName="firstName"
-          required
-          minlength="3"
-          maxlength="50"
-          pattern="^[a-zA-Z ]+$"
-        />
-        <div id="errorFirstName" *ngIf="isFieldInvalid('firstName')">errorFirstName</div>
-      </div>
+  <div class="form-group">
+    <label for="inputFirstname">First Name</label>
+    <input type="text" id="inputFirstname" formControlName="firstName" minlength="3" maxlength="50" pattern="^[a-zA-Z]+$" />
+    <div *ngIf="isFieldInvalid('firstName')" class="error" id="errorFirstName">
+      Invalid First Name
+    </div>
+  </div>
 
-      <div>
-        <label for="gender">Gender</label>
-        <label>
-          <input type="checkbox" formControlName="gender" value="Male" />
-          Male
-        </label>
-        <label>
-          <input type="checkbox" formControlName="gender" value="Female" />
-          Female
-        </label>
-        <div id="errorGender" *ngIf="isFieldInvalid('gender')">errorGender</div>
-      </div>
+  <div class="form-group">
+    <label for="country">Country</label>
+    <input type="text" id="country" formControlName="country" />
+    <div *ngIf="isFieldInvalid('country')" class="error" id="errorCountry">
+      Country is required
+    </div>
+  </div>
 
-      <div>
-        <label for="country">Country of Origin</label>
-        <input type="text" id="country" formControlName="country" required />
-        <div id="errorCountry" *ngIf="isFieldInvalid('country')">errorCountry</div>
-      </div>
+  <div class="form-group">
+    <label for="city">City</label>
+    <input type="text" id="city" formControlName="city" />
+    <div *ngIf="isFieldInvalid('city')" class="error" id="errorCity">
+      City is required
+    </div>
+  </div>
 
-      <div>
-        <label for="city">City of Origin</label>
-        <input type="text" id="city" formControlName="city" required />
-        <div id="errorCity" *ngIf="isFieldInvalid('city')">errorCity</div>
-      </div>
+  <div class="form-group">
+    <label for="age">Age</label>
+    <input type="text" id="age" formControlName="age" />
+    <div *ngIf="isAgeRequired() && isFieldInvalid('age')" class="error" id="errorAge">
+      Invalid Age
+    </div>
+  </div>
 
-      <div>
-        <label for="inputAge">age</label>
-        <input type="number" id="inputAge" formControlName="age" [required]="isAgeRequired()" />
-        <div id="errorAge" *ngIf="isFieldInvalid('age')">
-          errorAge
-        </div>
-      </div>
-
-      <button type="submit">Submit</button>
+  <div class="form-group">
+    <label for="gender">Gender </label>
+    <label for="male">Male</label>
+    <input type="checkbox" id="male" name="gender" value="male" formControlName="gender" />
+    <label for="female">Female</label>
+    <input type="checkbox" id="female" name="gender" value="female" formControlName="gender" />
+    <div *ngIf="isFieldInvalid('gender')" class="error" id="errorGender">
+      Gender is required
+    </div>
+  </div>
+  <div>
+  <button type="submit"="!registrationForm.valid">Form Submit</button>
+  </div>
 </form>
